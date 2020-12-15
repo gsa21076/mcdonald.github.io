@@ -33,18 +33,12 @@ const ImgLogo = styled.img`
   width: 50px;
 `;
 
-const Login = styled.button`
-  background: #299B01;
-  border: none;
+const LoginButton = styled.button`
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 16px;
   color: white;
   padding-right:30px;
-`;
-
-const ImgUser = styled.img`
-`;
-
-const P = styled.p`
-  font-size: 12px;
 `;
 
 
@@ -54,9 +48,9 @@ export const NavBar = () => (
       <ImgLogo src={logoImg} alt='logo' />
       <H1>MrDonald</H1>
     </Logo>
-    <Login>
-      <ImgUser src={userImg} alt='user' />
-      <P>Войти</P>
-    </Login>
+    <LoginButton>
+      <img src={userImg} alt='войти' />
+      <p>Войти</p>
+    </LoginButton>
   </NavBarStyled>
 )
