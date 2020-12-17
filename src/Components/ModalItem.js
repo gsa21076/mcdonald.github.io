@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BtnOrder } from './BtnOrder';
 
 const Overlay = styled.div`// затемнение для модального окна
   position: fixed;
@@ -26,40 +27,23 @@ const Banner = styled.div`
   background-image: url(${({ img }) => img});
   background-size: cover;
   background-position: center;
-  margin-bottom: 20px;
 `;
 
-const ModalOrder = styled.div`
-  height: 25%;
+const ModalOrder = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  height: calc(100% - 210px);
+  padding: 10px;
+`;
+
+
+const ModalHeader = styled.div`
+  font-size: 25px;
+  font-weight: 700;
+  font-family: 'Pacifico', cursive;
   display: flex;
   justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
-
-
-const H1 = styled.h1`
-  font-size: 30px;
-`;
-
-const Order = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  height:25%;
-
-`;
-
-const BtnOrder = styled.button`
-  width: 250px;
-  height: 65px;
-  border: none;
-  background-color: #299b01;
-`;
-
-const P = styled.p`
-  font-size: 21px;
-  color: #fff;
 `;
 
 
@@ -78,16 +62,14 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
       <Modal>
         <Banner img={openItem.img} />
         <ModalOrder>
-          <H1>{openItem.name}</H1>
-          <H1>{openItem.price.toLocaleString('ru-RU',
-            { style: 'currency', currency: 'RUB' })}
-          </H1>
+          <ModalHeader>
+            <div>{openItem.name}</div>
+            <div>{openItem.price.toLocaleString('ru-RU',
+              { style: 'currency', currency: 'RUB' })}</div>
+          </ModalHeader>
+          <BtnOrder>Добавить</BtnOrder>
+
         </ModalOrder>
-        <Order>
-          <BtnOrder>
-            <P>Добавить</P>
-          </BtnOrder>
-        </Order>
       </Modal>
     </Overlay>
   )
