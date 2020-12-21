@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import logoImg from 'd:/projectReact/mrdonald/src/image/logoImg.svg';
-import userImg from 'd:/projectReact/mrdonald/src/image/userImg.svg';
+import logoImg from '../../image/logoImg.svg';
+import userImg from '../../image/userImg.svg';
 
 
 const NavBarStyled = styled.header`
