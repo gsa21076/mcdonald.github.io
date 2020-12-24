@@ -18,4 +18,10 @@ export const BtnOrder = styled.button`
     color: #299b01;
     border-color: #299b01;
   }
+  &:disabled {
+    color: #1f1f1f;
+    background-color: #ccc;
+    border-color: #aaa;
+  }
+
 `;

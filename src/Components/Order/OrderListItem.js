@@ -4,9 +4,11 @@ import trashImage from '../../image/trash.svg';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { formatCurrency } from '../Functions/secondaryFunction';
 
+
 const OrderItemStyled = styled.li`
   display: flex;
   margin: 15px 15px;
+  flex-wrap: wrap;
 `;
 
 const ItemName = styled.span`
@@ -32,13 +34,27 @@ const TrashButton = styled.button`
   cursor: pointer;
 `;
 
+const Topping = styled.div`
+  color: #9a9a9a;
+  font-size: 14px;
+  width: 100%;
+`;
 
-export const OrderListItem = ({ order }) => (
-  <OrderItemStyled>
-    <ItemName>{order.name}</ItemName>
-    <span>{order.count}</span>
-    <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
-    <TrashButton />
-  </OrderItemStyled>
-);
+
+export const OrderListItem = ({ order }) => {
+  const topping = order.topping.filter(item => item.checked)
+    .map(item => item.name)
+    .join(', ');
+
+  return (
+    <OrderItemStyled>
+      <ItemName>{order.name} </ItemName>
+      <span>{order.count}</span>
+      <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
+      <TrashButton />
+      {topping && <Topping>Допы: {topping}</Topping>}
+      {order.choice && <Topping>Выбор:  {order.choice}</Topping>}
+    </OrderItemStyled>
+  )
+};
 
