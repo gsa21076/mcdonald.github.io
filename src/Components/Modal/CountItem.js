@@ -21,7 +21,6 @@ const ButtonCount = styled.button`
 
 export function CountItem({ count, setCount, onChange }) {
 
-  console.log(typeof count);
   return (
     <CountWrapper>
       <span>Количество</span>

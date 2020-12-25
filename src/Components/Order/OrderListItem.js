@@ -41,17 +41,19 @@ const Topping = styled.div`
 `;
 
 
-export const OrderListItem = ({ order }) => {
+export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
+
+
   const topping = order.topping.filter(item => item.checked)
     .map(item => item.name)
     .join(', ');
 
   return (
-    <OrderItemStyled>
+    <OrderItemStyled onClick={() => setOpenItem({ ...order, index })}>
       <ItemName>{order.name} </ItemName>
       <span>{order.count}</span>
       <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
-      <TrashButton />
+      <TrashButton onClick={() => deleteItem(index)} />
       {topping && <Topping>Допы: {topping}</Topping>}
       {order.choice && <Topping>Выбор:  {order.choice}</Topping>}
     </OrderItemStyled>
