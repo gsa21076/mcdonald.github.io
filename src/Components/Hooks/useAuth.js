@@ -7,16 +7,20 @@ export function useAuth(authFirebase) {
   const provider = new authFirebase.GoogleAuthProvider();
 
   const logIn = () => auth.signInWithPopup(provider);
+  const logOut = () => auth.signOut()
+    .catch(err => console.error());
 
   useEffect(() => {
     auth.onAuthStateChanged(user => {
       console.log(user);
       if (user) {
         setAuthentification(user);
+      } else {
+        setAuthentification(null);
       }
     });
   }, [authentification]);
 
-  return { authentification, logIn };
+  return { authentification, logIn, logOut };
 
 }
