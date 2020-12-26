@@ -41,17 +41,26 @@ const LoginButton = styled.button`
 `;
 const UserButton = styled.div`
   display: flex;
+  align-items: center;
+  text-align: center;
 `;
 
 const LogOut = styled.span`
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
+  margin-right: 10px;
+
+`;
+
+const Figure = styled.div`
+  margin: 0 20px;
 `;
 
 
 
-export const NavBar = ({ authentification, logIn }) => (
+
+export const NavBar = ({ authentification, logIn, logOut }) => (
   <NavBarStyled>
     <Logo>
       <ImgLogo src={logoImg} alt='logo' />
@@ -59,10 +68,11 @@ export const NavBar = ({ authentification, logIn }) => (
     </Logo>
     {authentification ?
       <UserButton>
-        <figure>
+        <Figure>
           <img src={userImg} alt={authentification.displayName} />
-          <LogOut tytle="Выйти">X</LogOut>
-        </figure>
+          <figcaption>{authentification.displayName}</figcaption>
+        </Figure>
+        <LogOut tytle="Выйти" onClick={logOut}>X</LogOut>
       </UserButton> :
       <LoginButton onClick={logIn}>
         <img src={userImg} alt='войти' />
