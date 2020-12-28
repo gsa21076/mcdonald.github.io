@@ -4,6 +4,7 @@ import { BtnOrder } from '../Style/BtnOrder';
 import { OrderListItem } from './OrderListItem';
 import { totalPriceItems } from '../Functions/secondaryFunction';
 import { formatCurrency } from '../Functions/secondaryFunction';
+import { projection } from '../Functions/secondaryFunction';
 
 const OrderStyled = styled.section`
   position: fixed;
@@ -50,20 +51,43 @@ const EmplyList = styled.p`
   text-align: center;
 `;
 
-export const Order = ({ orders, setOrders, setOpenItem }) => {
+const rulesData = {
+  name: ['name'],
+  price: ['price'],
+  count: ['count'],
+  topping: ['topping', arr => arr.filter(obj => obj.checked).map(obj => obj.name),
+    arr => arr.length ? arr : 'no toppings'],
+  choice: ['choice', item => item ? item : 'no choices'],
+};
 
-  const deleteItem = index => {
-    const newOrders = [...orders];
-    newOrders.splice(index, 1);
-    setOrders(newOrders);
-  }
-
+export const Order = ({ orders, setOrders, setOpenItem, authentification, logIn, firebaseDatabase }) => {
+  const dataBase = firebaseDatabase();
 
   const total = orders.reduce((result, order) =>
     totalPriceItems(order) + result, 0);
 
   const totalCounter = orders.reduce((result, order) =>
     order.count + result, 0);
+
+  const sendOrder = () => {
+    const newOrder = orders.map(projection(rulesData));
+    dataBase.ref('orders').push().set({
+      nameClient: authentification.displayName,
+      email: authentification.email,
+      order: newOrder,
+      totalCounter: totalCounter,
+      totalprice: total
+    });
+  };
+
+
+  const deleteItem = index => {
+    const newOrders = [...orders];
+    newOrders.splice(index, 1);
+    setOrders(newOrders);
+  };
+
+
 
   return (
     <OrderStyled>
@@ -87,7 +111,13 @@ export const Order = ({ orders, setOrders, setOpenItem }) => {
         <TotalPrice>{formatCurrency(total)} </TotalPrice>
 
       </Total>
-      <BtnOrder>Оформить</BtnOrder>
+      <BtnOrder onClick={() => {
+        if (authentification) {
+          sendOrder();
+        } else {
+          logIn();
+        }
+      }}>Оформить</BtnOrder>
     </OrderStyled>
   )
 }
