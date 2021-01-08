@@ -19,7 +19,7 @@ const OrderStyled = styled.section`
   padding: 20px;
 `;
 
-const OrderTitle = styled.h2`
+export const OrderTitle = styled.h2`
   text-align: center;
   margin-bottom: 30px;
 
@@ -33,7 +33,7 @@ const OrderList = styled.ul`
 
 `;
 
-const Total = styled.div`
+export const Total = styled.div`
   display: flex;
   margin: 0 35px 30px;
   & span:first-child {
@@ -41,7 +41,7 @@ const Total = styled.div`
   }
 `;
 
-const TotalPrice = styled.span`
+export const TotalPrice = styled.span`
   text-align: right;
   min-width: 65px;
   margin-left: 20px;
@@ -78,6 +78,7 @@ export const Order = ({ orders, setOrders, setOpenItem, authentification, logIn,
       totalCounter: totalCounter,
       totalprice: total
     });
+    setOrders([]);
   };
 
 

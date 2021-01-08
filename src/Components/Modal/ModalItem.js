@@ -10,7 +10,7 @@ import { Choices } from './Choiсes';
 import { useTopping } from '../Hooks/useTopping';
 import { useChoices } from '../Hooks/useChoices';
 
-const Overlay = styled.div`// затемнение для модального окна
+export const Overlay = styled.div`// затемнение для модального окна
   position: fixed;
   display: flex;
   justify-content: center;

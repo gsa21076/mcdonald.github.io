@@ -18,7 +18,7 @@ export function useAuth(authFirebase) {
         setAuthentification(null);
       }
     });
-  }, [authentification]);
+  }, [auth, authentification]);
 
   return { authentification, logIn, logOut };
 
